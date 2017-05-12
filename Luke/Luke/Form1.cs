@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LukeSimple
+namespace Luke
 {
 	public partial class Form1 : Form
 	{
@@ -29,13 +29,14 @@ namespace LukeSimple
 
 		private void buttonCalculate_Click(object sender, EventArgs e)
 		{
+			labelAnswer.Text = "";
 			Calculate();
 		}
 
 		private void Calculate()
 		{
 			// чтение чисел
-			BigInt N = new BigInt(textBoxN.Text);
+			BigInt m = new BigInt(textBoxN.Text);
 			List<BigInt> q = new List<BigInt>();
 
 			string temp = "";
@@ -49,9 +50,63 @@ namespace LukeSimple
 					temp = "";
 				}
 			}
+			if (temp != "")
+				q.Add(new BigInt(temp));
 
+			// 1)
+			int c = 20, k = 0;
 
+			Random random = new Random();
 
+			while (true)
+			{
+				// 2)
+				int max;
+				if (m >= int.MaxValue)
+					max = int.MaxValue;
+				else
+					max = int.Parse(m.ToString());
+				BigInt a = new BigInt(random.Next(1, max));
+
+				if (BigInt.GCD(a, m) != 1)
+				{
+					labelAnswer.Text = "Число составное";
+					return;
+				}
+
+				// 3)
+				c--;
+				if(c==0)
+				{
+					labelAnswer.Text = "Не удалось установить простоту";
+					return;
+				}
+
+				// 4)
+				while (k < q.Count)
+				{
+					// 4.1)
+					if (BigInt.Pow(a, m - 1, m) != 1)
+					{
+						labelAnswer.Text = "Число составное";
+						return;
+					}
+					// 4.2
+					if (BigInt.Pow(a, (m - 1) / q.ElementAt(k), m) == 1)
+						break;
+					// 4.3
+					k++;
+				}
+
+				// переформулированное условие выхода
+				if (k >= q.Count)
+				{
+					labelAnswer.Text = "Число простое";
+					return;
+				}
+			}
 		}
+
+
 	}
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LukeSimple
+namespace Luke
 {
 	enum Sign
 	{
@@ -481,6 +481,24 @@ namespace LukeSimple
 			else
 				return rest.UnNull();
 		}
+
+		public static BigInt GCD(BigInt number1, BigInt number2)
+		{
+			BigInt a = new BigInt(number1);
+			BigInt b = new BigInt(number2), x = new BigInt(0), d = new BigInt(1);
+			while (a != 0)
+			{
+				BigInt q = b / a;
+				BigInt y = a;
+				a = b % a;
+				b = y;
+				y = d;
+				d = x - q * d;
+				x = y;
+			}
+			return b;
+		}
+
 	}
 
 

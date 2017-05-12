@@ -1,4 +1,4 @@
-﻿namespace LukeSimple
+﻿namespace Luke
 {
 	partial class Form1
 	{
@@ -62,10 +62,12 @@
 			this.buttonFromFile.TabIndex = 2;
 			this.buttonFromFile.Text = "Из файла";
 			this.buttonFromFile.UseVisualStyleBackColor = true;
+			this.buttonFromFile.Click += new System.EventHandler(this.buttonFromFile_Click);
 			// 
 			// openFileDialog1
 			// 
 			this.openFileDialog1.FileName = "openFileDialog1";
+			this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
 			// 
 			// label2
 			// 
@@ -92,6 +94,7 @@
 			this.buttonCalculate.TabIndex = 2;
 			this.buttonCalculate.Text = "Проверить";
 			this.buttonCalculate.UseVisualStyleBackColor = true;
+			this.buttonCalculate.Click += new System.EventHandler(this.buttonCalculate_Click);
 			// 
 			// labelAnswer
 			// 
