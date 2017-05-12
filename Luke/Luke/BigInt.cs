@@ -383,6 +383,7 @@ namespace Luke
 			return left % new BigInt(right);
 		}
 
+		/// <summary> Возведение в степень по модулю, сложность O(module^2) </summary> 
 		public static BigInt Pow(BigInt basis, BigInt _rank, BigInt module)
 		{
 			BigInt a = basis;
@@ -482,6 +483,7 @@ namespace Luke
 				return rest.UnNull();
 		}
 
+		/// <summary> НОД, сложность O(max(number1, number2) ^2) </summary>
 		public static BigInt GCD(BigInt number1, BigInt number2)
 		{
 			BigInt a = new BigInt(number1);
