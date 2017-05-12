@@ -44,7 +44,10 @@ namespace LukeSimple
 				if (Char.IsDigit(textBoxNMinus1.Text[i]))
 					temp += textBoxNMinus1.Text[i];
 				else if (textBoxNMinus1.Text[i] == ' ')
+				{
 					q.Add(new BigInt(temp));
+					temp = "";
+				}
 			}
 
 
