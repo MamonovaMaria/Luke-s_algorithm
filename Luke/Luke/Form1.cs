@@ -5,13 +5,21 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
+
 
 namespace Luke
 {
 	public partial class Form1 : Form
 	{
+		BigInt m;
+		List<BigInt> q;
+		string temp;
+		Random random;
+
 		public Form1()
 		{
 			InitializeComponent();
@@ -24,23 +32,22 @@ namespace Luke
 
 		private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
 		{
-			textBoxN.Text = new System.IO.StreamReader(openFileDialog1.FileName).ReadToEnd();
+			StreamReader openFileDialog = new StreamReader(openFileDialog1.FileName, Encoding.Default);
+			textBoxN.Text = openFileDialog.ReadToEnd();
+			openFileDialog.Close();
 		}
 
 		private void buttonCalculate_Click(object sender, EventArgs e)
 		{
 			labelAnswer.Text = "";
-			Calculate();
-		}
 
-		private void Calculate()
-		{
 			// чтение чисел
-			BigInt m = new BigInt(textBoxN.Text);
-			List<BigInt> q = new List<BigInt>();
+			m = new BigInt(textBoxN.Text);
+			q = new List<BigInt>();
+			random = new Random();
 
-			string temp = "";
-			for(int i=0; i<textBoxNMinus1.Text.Length; i++)
+			temp = "";
+			for (int i = 0; i < textBoxNMinus1.Text.Length; i++)
 			{
 				if (Char.IsDigit(textBoxNMinus1.Text[i]))
 					temp += textBoxNMinus1.Text[i];
@@ -52,11 +59,37 @@ namespace Luke
 			}
 			if (temp != "")
 				q.Add(new BigInt(temp));
+			List<TimeSpan> resTime1 = new List<TimeSpan>();
+			List<TimeSpan> resTime2 = new List<TimeSpan>();
+			int ch = 0;
+			do
+			{
+				DateTime time1 = DateTime.Now;
+				Stopwatch stopWatch = new Stopwatch();
+				stopWatch.Start();
 
+			Calculate();
+
+			DateTime time2 = DateTime.Now;
+				stopWatch.Stop();
+				resTime1.Add(stopWatch.Elapsed);
+				resTime2.Add(time2 - time1);
+				ch++;
+			} while (ch < 1000);
+			long t1 = 0;
+			long t2 = 0;
+			foreach (var el in resTime1)
+				t1 += el.Ticks;
+			foreach (var el in resTime2)
+				t2 += el.Ticks;
+			textBoxForTime1.Text = (t1 / 1000).ToString();
+			textBoxForTime2.Text = (t2 / 1000).ToString();
+		}
+
+		private void Calculate()
+		{
 			// 1)
 			int c = 20, k = 0;
-
-			Random random = new Random();
 
 			while (true)
 			{
@@ -76,7 +109,7 @@ namespace Luke
 
 				// 3)
 				c--;
-				if(c==0)
+				if (c == 0)
 				{
 					labelAnswer.Text = "Не удалось установить простоту";
 					return;

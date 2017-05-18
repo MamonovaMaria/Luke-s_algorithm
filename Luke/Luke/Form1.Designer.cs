@@ -36,6 +36,8 @@
 			this.textBoxNMinus1 = new System.Windows.Forms.TextBox();
 			this.buttonCalculate = new System.Windows.Forms.Button();
 			this.labelAnswer = new System.Windows.Forms.Label();
+			this.textBoxForTime1 = new System.Windows.Forms.TextBox();
+			this.textBoxForTime2 = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -104,11 +106,27 @@
 			this.labelAnswer.Size = new System.Drawing.Size(0, 13);
 			this.labelAnswer.TabIndex = 0;
 			// 
+			// textBoxForTime1
+			// 
+			this.textBoxForTime1.Location = new System.Drawing.Point(54, 224);
+			this.textBoxForTime1.Name = "textBoxForTime1";
+			this.textBoxForTime1.Size = new System.Drawing.Size(67, 20);
+			this.textBoxForTime1.TabIndex = 3;
+			// 
+			// textBoxForTime2
+			// 
+			this.textBoxForTime2.Location = new System.Drawing.Point(256, 224);
+			this.textBoxForTime2.Name = "textBoxForTime2";
+			this.textBoxForTime2.Size = new System.Drawing.Size(67, 20);
+			this.textBoxForTime2.TabIndex = 4;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(388, 272);
+			this.Controls.Add(this.textBoxForTime2);
+			this.Controls.Add(this.textBoxForTime1);
 			this.Controls.Add(this.buttonCalculate);
 			this.Controls.Add(this.buttonFromFile);
 			this.Controls.Add(this.textBoxNMinus1);
@@ -133,6 +151,8 @@
 		private System.Windows.Forms.TextBox textBoxNMinus1;
 		private System.Windows.Forms.Button buttonCalculate;
 		private System.Windows.Forms.Label labelAnswer;
+		private System.Windows.Forms.TextBox textBoxForTime1;
+		private System.Windows.Forms.TextBox textBoxForTime2;
 	}
 }
 
